@@ -41,4 +41,13 @@ class ChapterJpaEntity(
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "book_id", referencedColumnName = "id", insertable = false, updatable = false)
     var book: BookEntityJpa? = null
+
+    @OneToMany(
+        mappedBy = "chapter",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
+    @OrderBy("createdAt DESC")
+    var bookmarks: MutableList<BookmarkJpaEntity> = mutableListOf()
 }

@@ -43,5 +43,14 @@ data class BookEntityJpa(
         fetch = FetchType.LAZY
     )
     @OrderBy("index ASC")
-    var chapters: MutableList<ChapterJpaEntity> = mutableListOf()
+    var chapters: MutableList<ChapterJpaEntity> = mutableListOf(),
+
+    @OneToMany(
+        mappedBy = "book",
+        cascade = [CascadeType.ALL],
+        orphanRemoval = true,
+        fetch = FetchType.LAZY
+    )
+    @OrderBy("createdAt DESC")
+    var bookmarks: MutableList<BookmarkJpaEntity> = mutableListOf()
 )
